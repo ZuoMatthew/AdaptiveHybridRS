@@ -22,8 +22,6 @@ class MasterRS:
         prda = PropertyData(self.colNames, self.chunkSize, self.colItems, self.colUsers)
         fullData = prda.csvToPandas(filename)
         simplifiedData = prda.removeDuplicates(fullData)
-        # simplifiedData = prda.removeDuplicates(fullData.iloc[:, self.colNames])
-
         reducedData = prda.alternateRemoveSparse(simplifiedData, self.colItems, self.colUsers,
                                                  self.nSharedItems, self.nSharedUsers, self.nIter)
 
@@ -32,11 +30,11 @@ class MasterRS:
         return reducedData
 
     def getUserList(self, dataframe):
-        cf = CollaborativeFilter(dataframe, self.colItems, self.colUsers)    # To put into init???
+        cf = CollaborativeFilter(dataframe, self.colItems, self.colUsers)
         return cf.getUserList()
 
     def getItemList(self, dataframe):
-        cf = CollaborativeFilter(dataframe, self.colItems, self.colUsers)    # To put into init???
+        cf = CollaborativeFilter(dataframe, self.colItems, self.colUsers)
         return cf.getItemList()
 
 
